@@ -8,4 +8,14 @@ public class WinScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         MiddleMessage.hasWon = true;
     }
+    void Update() {
+        if (Input.GetKey(KeyCode.R) && MessageScript.numLives == 0) {
+            MessageScript.numLives = 3;
+            PlayerScript.obj.timeScale = 1f;
+        }
+        if (Input.GetKey(KeyCode.R) && MiddleMessage.hasWon) {
+            MiddleMessage.hasWon = false;
+            PlayerScript.obj.timeScale = 1f;
+        }
+    }
 }

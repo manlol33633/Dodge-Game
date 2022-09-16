@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour
     public static Vector3 pos;
     public static bool isWaiting = false;
     private float timer;
+    public static GameObject obj;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class PlayerScript : MonoBehaviour
         position[0] = transform.position.x;
         position[1] = transform.position.y;
         pos = transform.position;
+        obj = gameObject;
     }
 
     // Update is called once per frame
@@ -33,6 +35,7 @@ public class PlayerScript : MonoBehaviour
         if (MessageScript.numLives == 0) {
             Time.timeScale = 0f;
         }
+        
     }
 
     void FixedUpdate() {
