@@ -14,6 +14,9 @@ public class PlayerScript : MonoBehaviour
     public static bool isWaiting = false;
     private float timer;
     public static GameObject obj;
+    public static Quaternion startRotation = Quaternion.Euler(0, 0, -90);
+    public static Vector3 startPos = new Vector3(-19.5841f, -5.3575f, 0f);
+    public static bool restart = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +28,16 @@ public class PlayerScript : MonoBehaviour
         position[1] = transform.position.y;
         pos = transform.position;
         obj = gameObject;
+        transform.SetPositionAndRotation(startPos, startRotation);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (restart == true) {
+            transform.SetPositionAndRotation(startPos, startRotation);
+            restart = false;
+        }
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         movementDirection.Normalize();
         if (MessageScript.numLives == 0) {

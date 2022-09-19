@@ -6,16 +6,16 @@ public class WinScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D other) {
-        MiddleMessage.hasWon = true;
+        if (other.tag == "Player") {
+            MiddleMessage.hasWon = true;
+        }
     }
     void Update() {
-        if (Input.GetKey(KeyCode.R) && MessageScript.numLives == 0) {
-            MessageScript.numLives = 3;
-            PlayerScript.obj.timeScale = 1f;
-        }
         if (Input.GetKey(KeyCode.R) && MiddleMessage.hasWon) {
             MiddleMessage.hasWon = false;
-            PlayerScript.obj.timeScale = 1f;
+            Time.timeScale = 1f;
+            MiddleMessage.restart = true;
+            PlayerScript.restart = true;
         }
     }
 }

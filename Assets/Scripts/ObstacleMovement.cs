@@ -22,8 +22,7 @@ public class ObstacleMovement : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player") {
-            other.transform.position = new Vector3(-19.49f, -1.58f, 0);
-            other.transform.rotation = Quaternion.Euler(0, 0, 180);
+            other.transform.SetPositionAndRotation(PlayerScript.startPos, PlayerScript.startRotation);
             MessageScript.numLives -= 1;
         }
     }
@@ -54,6 +53,12 @@ public class ObstacleMovement : MonoBehaviour
         }
         if (MessageScript.numLives == 0 || MiddleMessage.hasWon) {
             Time.timeScale = 0f;
+        }
+        if (Input.GetKey(KeyCode.R) && MessageScript.numLives == 0) {
+            MessageScript.numLives = 3;
+            Time.timeScale = 1f;
+            MiddleMessage.restart = true;
+            PlayerScript.restart = true;
         }
     }
 }
